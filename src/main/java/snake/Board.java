@@ -56,5 +56,15 @@ public class Board {
         }
     }
 
+    public void initializeSnake(Snake snake){
+        snake.snakeStart();
+        int [] startingCords = snake.getSnakeHead();
+        int startRow = startingCords[0];
+        int startCol = startingCords[1];
+
+        board[startRow][startCol] = 'X';
+
+    }
+
 
 }

@@ -40,17 +40,21 @@ public class Board {
         }
     }
 
+    public void addFood(Food food) {
+        //Verify food is assigned to an empty coordinate to not clash with snake
+        boolean validLocation = false;
+        while (!validLocation) {
+            food.generateCoordinates();
+            int[] coordinates = food.getCoordinates();
+            int rowCord = coordinates[0];
+            int colCord = coordinates[1];
 
-
-    public void addFood(Food food){
-
-        food.generateCoordinates();
-        int[] coordinates = food.getCoordinates();
-
-        int rowCord = coordinates[0];
-        int colCord = coordinates[1];
-
-        this.board[rowCord][colCord] = food.getShape();
+            if (board[rowCord][colCord] == ' ') {
+                board[rowCord][colCord] = food.getShape();
+                validLocation = true;
+            }
+        }
     }
+
 
 }

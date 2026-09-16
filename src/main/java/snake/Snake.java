@@ -34,24 +34,18 @@ public class Snake {
             copyCoordinates.add(coordinate.clone());
         }
 
-        ArrayList<int[]> newCoordinates = new ArrayList<>();
-
         int [] newHead = getSnakeHead().clone();
         newHead[1]++;
 
-        //Setting new body head
-        newCoordinates.add(newHead);
         //Removing last element of old body
         int lastElement = copyCoordinates.size() - 1;
         copyCoordinates.remove(lastElement);
 
-        //Moving body
-        for (int[] element : copyCoordinates){
-            //Possible refactor in one line for adding all elements
-            snakeCoordinates.add(element);
-        }
+        //Setting new body head and moving body by one position in consequence
+        copyCoordinates.addFirst(newHead.clone());
 
-
+        //Setting snake coordinates as new modified coordinates
+        setSnakeCoordinates(copyCoordinates);
     }
 
 }

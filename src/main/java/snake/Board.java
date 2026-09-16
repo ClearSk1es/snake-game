@@ -16,9 +16,9 @@ public class Board {
                 //Setting the board structure
                 if((row == 0 || row == rows-1) && (col == 0 || col == columns-1)){
                     this.board[row][col] = '+';
-                } else if ((row == 0 || row == rows-1) && (col != 0 || col != columns-1)) {
+                } else if ((row == 0 || row == rows-1) && (col != 0 && col != columns-1)) {
                     this.board[row][col] = '-';
-                } else if ((row != 0 || row != rows-1) && (col == 0 || col == columns-1)) {
+                } else if ((row != 0 && row != rows-1) && (col == 0 || col == columns-1)) {
                     this.board[row][col] = '|';
                 } else {
                     this.board[row][col] = ' ';
@@ -39,4 +39,18 @@ public class Board {
             System.out.println();
         }
     }
+
+
+
+    public void addFood(Food food){
+
+        food.generateCoordinates();
+        int[] coordinates = food.getCoordinates();
+
+        int rowCord = coordinates[0];
+        int colCord = coordinates[1];
+
+        this.board[rowCord][colCord] = food.getShape();
+    }
+
 }

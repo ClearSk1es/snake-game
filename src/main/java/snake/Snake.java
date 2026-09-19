@@ -55,16 +55,16 @@ public class Snake {
             return newHead;
         }
         else if("up".equals(direction)){
-            newHead[0]++;
+            newHead[0]--;
             if (!isValidMove(newHead)){
-                newHead[0]--;
+                newHead[0]++;
             }
             return newHead;
         }
         else {
-            newHead[0]--;
+            newHead[0]++;
             if (!isValidMove(newHead)){
-                newHead[0]++;
+                newHead[0]--;
             }
             return newHead;
         }

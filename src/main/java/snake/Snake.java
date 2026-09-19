@@ -1,5 +1,6 @@
 package snake;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -89,8 +90,8 @@ public class Snake {
     }
 
     public int[] addTail(String direction) {
-
         //Enhanced switch usage, switch can be used as an expression
+        //Gets the current snake direction and creates new coordinate in the opposite side based on last tail location
         String oppositeDirection = switch (direction) {
             case "right" -> "left";
             case "left" -> "right";
@@ -129,10 +130,23 @@ public class Snake {
         }
     }
 
-    
+    public boolean checkCollision(int[] newHead, Board board){
+        ArrayList<int[]> currentCords = getSnakeCoordinates();
+        int body = currentCords.size()-2;
 
+        //checkin body collision, start from 2 value
+        for (int coordinate = 1; coordinate < body; coordinate++ ){
+            if(Arrays.equals(newHead, currentCords.get(coordinate))){
+                return true;
+            }
+        }
 
-
-
+        if(
+            (newHead[0] == 0 || newHead[0] == board.getRows() - 1 ) ||
+            (newHead[1] == 0 || newHead[1] == board.getColumns() - 1)){
+                return true;
+        }
+        return false;
+    }
 
 }

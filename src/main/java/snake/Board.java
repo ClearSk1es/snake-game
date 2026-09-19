@@ -40,6 +40,14 @@ public class Board {
         }
     }
 
+    public int getColumns(){
+        return columns;
+    }
+
+    public int getRows(){
+        return rows;
+    }
+
     public void addFood(Food food) {
         //Verify food is assigned to an empty coordinate to not clash with snake
         boolean validLocation = false;

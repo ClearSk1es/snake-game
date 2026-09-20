@@ -1,6 +1,14 @@
 package snake;
 //Importing non-blocking I/O;
-import java.nio.*;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
+import org.jline.utils.InfoCmp;
+import org.jline.utils.NonBlockingReader;
+
+import java.io.IOException;
+import java.io.Reader;
 
 public class Game {
 
@@ -11,23 +19,43 @@ public class Game {
         public Game() {
         }
 
-        public void start(){
+        public void start() throws IOException, InterruptedException {
             //Initialize values
+
+            // Create a terminal
+            Terminal terminal = TerminalBuilder.builder().system(true).build();
+            // Get a non-blocking reader
+            NonBlockingReader reader = terminal.reader();
+
+            board.addFood(food);
+            board.renderBoard(board.getBoard());
             board.setBoard();
             snake.snakeStart();
             String currentDirection = "right";
 
             //Game loop
-
             boolean game = true;
-            while (game){
+            while (true){
                 //Process input - Check Input
+                if (reader.available() > 0){
+                    int c = reader.read();
+                    currentDirection = switch (c){
+                        case 'w' -> "up";
+                        case 's' -> "down";
+                        case 'a' -> "left";
+                        case 'd' -> "right";
+                        default -> currentDirection;
+                    };
+                }
+
 
                 //Update State
                 int [] moveDirection = snake.changeDirection(currentDirection);
                 if (snake.checkCollision(moveDirection, board)){
-                    System.out.println("Game Over");
-                    game = false;
+                    terminal.writer().println("Game Over");
+                    terminal.close();
+                    break;
+
                 }
                 snake.move(moveDirection);
 
@@ -35,11 +63,15 @@ public class Game {
 
 
                 //Wait
+                terminal.puts(InfoCmp.Capability.clear_screen);
+
+                //Move cursor to position(---)
+                terminal.puts(InfoCmp.Capability.cursor_address, 2, 2);
+                Thread.sleep(500);
 
             }
 
-            board.addFood(food);
-            board.renderBoard(board.getBoard());
+
         }
 
 

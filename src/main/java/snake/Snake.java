@@ -58,12 +58,14 @@ public class Snake {
                 newHead[0]++;
             }
             return newHead;
-        } else {
+        } else if ("down".equals(direction)){
             newHead[0]++;
             if (!isValidMove(newHead)) {
                 newHead[0]--;
             }
             return newHead;
+        } else {
+            return changeDirection(direction);
         }
 
     }
@@ -97,7 +99,7 @@ public class Snake {
             case "left" -> "right";
             case "up" -> "down";
             case "down" -> "up";
-            default -> "";
+            default -> direction;
         };
         int[] newTail = getSnakeCoordinates().getLast().clone();
 

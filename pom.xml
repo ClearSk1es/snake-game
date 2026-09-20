@@ -9,7 +9,7 @@
 
   <name>snake-game</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,6 +28,7 @@
     </dependencies>
   </dependencyManagement>
 
+
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -39,6 +40,11 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jline</groupId>
+      <artifactId>jline</artifactId>
+      <version>3.30.0</version>
     </dependency>
   </dependencies>
 

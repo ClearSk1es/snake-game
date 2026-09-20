@@ -1,4 +1,6 @@
 package snake;
+//Importing non-blocking I/O;
+import java.nio.*;
 
 public class Game {
 
@@ -10,24 +12,35 @@ public class Game {
         }
 
         public void start(){
+            //Initialize values
             board.setBoard();
-            board.initializeSnake(snake);
-            String initialDirection = "right";
+            snake.snakeStart();
+            String currentDirection = "right";
+
+            //Game loop
 
             boolean game = true;
             while (game){
+                //Process input - Check Input
 
-                if (snake.checkCollision()){
+                //Update State
+                int [] moveDirection = snake.changeDirection(currentDirection);
+                if (snake.checkCollision(moveDirection, board)){
+                    System.out.println("Game Over");
                     game = false;
                 }
+                snake.move(moveDirection);
+
+                //Render Ouput
+
+
+                //Wait
+
             }
 
             board.addFood(food);
             board.renderBoard(board.getBoard());
         }
-
-
-
 
 
 }

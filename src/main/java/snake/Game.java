@@ -28,7 +28,7 @@ public class Game {
             NonBlockingReader reader = terminal.reader();
 
             board.addFood(food);
-            board.renderBoard(board.getBoard());
+            board.renderBoard(snake, food);
             board.setBoard();
             snake.snakeStart();
             String currentDirection = "right";
@@ -60,7 +60,7 @@ public class Game {
                 snake.move(moveDirection);
 
                 //Render Ouput
-
+                board.renderBoard(snake, food);
 
                 //Wait
                 terminal.puts(InfoCmp.Capability.clear_screen);

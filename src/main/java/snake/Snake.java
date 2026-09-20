@@ -25,6 +25,10 @@ public class Snake {
         return snakeCoordinates.getFirst();
     }
 
+    public int getSnakeSize(){
+        return getSnakeCoordinates().size();
+    }
+
     public boolean isValidMove(int[] newHead) {
         //Arrays.equals checks equality between 1D arrays
         if (getSnakeCoordinates().size() == 1) {

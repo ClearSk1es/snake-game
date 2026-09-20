@@ -1,5 +1,8 @@
 package snake;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Board {
 
     private static final int rows = 12;
@@ -31,12 +34,34 @@ public class Board {
         return this.board;
     }
 
-    public void renderBoard(char[][] board){
-        for (char[] row: board){
-            for (char col: row){
-                System.out.print(col);
+    public void renderBoard(Snake snake, Food food) {
+        //First print board borders
+        setBoard();
+
+        //Setting all my element states in a more clean way.
+        char[][] currentBoard = getBoard();
+        int[] currentSnakeHead = snake.getSnakeHead();
+        ArrayList<int[]> currentSnake = snake.getSnakeCoordinates();
+        int[] currentFood = food.getCoordinates();
+        int snakeSize = snake.getSnakeSize();
+
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (row == currentSnakeHead[0] && col == currentSnakeHead[1]){
+                    currentBoard[row][col] = 'X';
+                }
+                if (snakeSize > 1){
+                    for (int[] body : currentSnake){
+                        if (row == body[0] && col == body[1]){
+                            currentBoard[row][col] = 'O';
+                        }
+                    }
+                }
+                if (row == currentFood[0] && col == currentFood[1] ){
+                    currentBoard[row][col] = '*';
+                }
             }
-            System.out.println();
         }
     }
 

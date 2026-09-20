@@ -18,12 +18,8 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        // Create a terminal
-        Terminal terminal = TerminalBuilder.builder().system(true).build();
-
-        // Create a line reader
-        //LineReader reader = LineReaderBuilder.builder().terminal(terminal).build();
-        
+        Game game = new Game();
+        game.start();
 
 
     }

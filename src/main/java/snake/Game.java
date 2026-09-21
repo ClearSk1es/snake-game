@@ -37,11 +37,12 @@ public class Game {
             //Initialize snake head coordinates
             snake.snakeStart();
             //Render board with all its components
+
             board.setBoard(snake, food);
             board.renderBoard(terminal.writer());
-            terminal.puts(InfoCmp.Capability.clear_screen);
-            terminal.puts(InfoCmp.Capability.cursor_address, 0, 0);
+            terminal.puts(InfoCmp.Capability.cursor_address,8, 0);
             terminal.flush();
+
 
             //Initialize direction for snake at start of game
             String currentDirection = "right";
@@ -78,7 +79,7 @@ public class Game {
                 }
 
                 //Clear Screen
-                terminal.puts(InfoCmp.Capability.cursor_address, 0, 0);
+                terminal.puts(InfoCmp.Capability.cursor_address,7, 0);
 
                 //Render Ouput
                 board.setBoard(snake, food);

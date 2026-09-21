@@ -40,7 +40,7 @@ public class Game {
 
             board.setBoard(snake, food);
             board.renderBoard(terminal.writer());
-            terminal.puts(InfoCmp.Capability.cursor_address,8, 0);
+            terminal.puts(InfoCmp.Capability.cursor_address,5, 0);
             terminal.flush();
 
 
@@ -78,15 +78,14 @@ public class Game {
                     board.addFood(food);
                 }
 
-                //Clear Screen
-                terminal.puts(InfoCmp.Capability.cursor_address,7, 0);
-
                 //Render Ouput
                 board.setBoard(snake, food);
                 board.renderBoard(terminal.writer());
                 terminal.flush();
-                //Wait
+
                 //Move cursor to position(---)
+                terminal.puts(InfoCmp.Capability.cursor_address,5, 0);
+                //Wait
                 Thread.sleep(1000);
 
             }

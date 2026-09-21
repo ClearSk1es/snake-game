@@ -123,7 +123,7 @@ public class Snake {
 
     }
 
-    public void eatFood(Food currentFood, String direction) {
+    public boolean eatFood(Food currentFood, String direction) {
         int [] foodCords = currentFood.getCoordinates();
 
         if (Arrays.equals(getSnakeHead(), foodCords)) {
@@ -133,7 +133,10 @@ public class Snake {
             newCoordinates.add(newTail);
 
             setSnakeCoordinates(newCoordinates);
+
+            return true;
         }
+        return false;
     }
 
     public boolean checkCollision(int[] newHead, Board board){

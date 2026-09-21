@@ -1,7 +1,9 @@
 package snake;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.PrintWriter;
 
 public class Board {
 
@@ -13,7 +15,7 @@ public class Board {
     public Board() {
     }
 
-    public void setBoard(){
+    public void setBoardBorders(){
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 //Setting the board structure
@@ -34,9 +36,9 @@ public class Board {
         return this.board;
     }
 
-    public void renderBoard(Snake snake, Food food) {
+    public void setBoard(Snake snake, Food food) {
         //First print board borders
-        setBoard();
+        setBoardBorders();
 
         //Setting all my element states in a more clean way.
         char[][] currentBoard = getBoard();
@@ -65,6 +67,18 @@ public class Board {
         }
     }
 
+    public void renderBoard(PrintWriter writer){
+        char[][] currBoard = getBoard();
+
+        for ( char[] row: currBoard){
+            for (char col : row){
+                writer.print(col);
+            }
+            writer.println();
+        }
+    }
+
+
     public int getColumns(){
         return columns;
     }
@@ -83,7 +97,6 @@ public class Board {
             int colCord = coordinates[1];
 
             if (board[rowCord][colCord] == ' ') {
-                board[rowCord][colCord] = food.getShape();
                 validLocation = true;
             }
         }

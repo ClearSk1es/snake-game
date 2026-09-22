@@ -40,7 +40,6 @@ public class Game {
 
             board.setBoard(snake, food);
             board.renderBoard(terminal.writer());
-            terminal.puts(InfoCmp.Capability.cursor_address,5, 0);
             terminal.flush();
 
 
@@ -66,6 +65,7 @@ public class Game {
                 int [] moveDirection = snake.changeDirection(currentDirection);
                 if (snake.checkCollision(moveDirection, board)){
                     terminal.writer().printf("Game Over");
+                    terminal.flush();
                     //Returning terminal to original values when closing
                     terminal.setAttributes(originalAttributes);
                     terminal.close();
@@ -78,14 +78,16 @@ public class Game {
                     board.addFood(food);
                 }
 
+                //Move cursor to position(---)
+                terminal.puts(InfoCmp.Capability.cursor_address,5, 0);
+                terminal.flush();
+
                 //Render Ouput
                 board.setBoard(snake, food);
                 board.renderBoard(terminal.writer());
                 terminal.flush();
-
-                //Move cursor to position(---)
-                terminal.puts(InfoCmp.Capability.cursor_address,5, 0);
                 //Wait
+
                 Thread.sleep(1000);
 
             }

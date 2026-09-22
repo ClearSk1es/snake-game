@@ -74,7 +74,7 @@ public class Board {
             for (char col : row){
                 writer.print(col);
             }
-            writer.println();
+            writer.print("\r\n");
         }
     }
 

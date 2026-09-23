@@ -21,6 +21,12 @@ public class Snake {
         this.snakeCoordinates = newSnakeCoordinates;
     }
 
+    public void setSnakeHead(int[] newSnakeHead){
+        this.snakeCoordinates.getFirst()[0] = newSnakeHead[0];
+        this.snakeCoordinates.getFirst()[1] = newSnakeHead[1];
+
+    }
+
     public int[] getSnakeHead() {
         return snakeCoordinates.getFirst();
     }
@@ -132,7 +138,9 @@ public class Snake {
             ArrayList<int[]> newCoordinates = new ArrayList<>(getSnakeCoordinates());
             newCoordinates.add(newTail);
 
+
             setSnakeCoordinates(newCoordinates);
+            setSnakeHead(newCoordinates.getFirst());
 
             return true;
         }

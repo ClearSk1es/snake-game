@@ -30,18 +30,25 @@ public class Game {
             // Get a non-blocking reader
             NonBlockingReader reader = terminal.reader();
 
-            //Present empty board at start of game
+            // Present empty board at start of game
             board.setBoardBorders();
-            //Initialize food coordinates
+            // Initialize food coordinates
             board.addFood(food);
-            //Initialize snake head coordinates
+            // Initialize snake head coordinates
             snake.snakeStart();
-            //Render board with all its components
+
+            //Initial Render
+            //Present empty board at start of game
+            terminal.puts(InfoCmp.Capability.clear_screen);
+            terminal.puts(InfoCmp.Capability.cursor_invisible);
 
             board.setBoard(snake, food);
+            //Move cursor to top-left
+            terminal.puts(InfoCmp.Capability.cursor_address, 0, 0);
+
+            //Render
             board.renderBoard(terminal.writer());
             terminal.flush();
-
 
             //Initialize direction for snake at start of game
             String currentDirection = "right";
@@ -51,7 +58,7 @@ public class Game {
             while (true){
                 //Process input - Check Input
                 if (reader.available() > 0){
-                    int c = reader.read();
+                    int c = reader.read(5000L);
                     currentDirection = switch (c){
                         case 'w' -> "up";
                         case 's' -> "down";
@@ -64,9 +71,12 @@ public class Game {
                 //Update State
                 int [] moveDirection = snake.changeDirection(currentDirection);
                 if (snake.checkCollision(moveDirection, board)){
-                    terminal.writer().printf("Game Over");
+                    terminal.puts(InfoCmp.Capability.cursor_normal);
+                    terminal.puts(InfoCmp.Capability.cursor_address, 13, 0);
+
+                    terminal.writer().printf("Game Over\r\n");
                     terminal.flush();
-                    //Returning terminal to original values when closing
+
                     terminal.setAttributes(originalAttributes);
                     terminal.close();
                     break;
@@ -76,19 +86,22 @@ public class Game {
                 if(snake.eatFood(food, currentDirection)){
                     //Generate new location for food
                     board.addFood(food);
+
                 }
 
-                //Move cursor to position(---)
-                terminal.puts(InfoCmp.Capability.cursor_address,5, 0);
-                terminal.flush();
-
-                //Render Ouput
+                //Update visual representation
                 board.setBoard(snake, food);
+
+                //Move cursor back to top-left
+                terminal.puts(InfoCmp.Capability.cursor_address, 0, 0);
+
+                //Render Output
                 board.renderBoard(terminal.writer());
                 terminal.flush();
+
                 //Wait
 
-                Thread.sleep(1000);
+                Thread.sleep(750);
 
             }
 

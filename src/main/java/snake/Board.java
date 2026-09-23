@@ -54,8 +54,8 @@ public class Board {
                     currentBoard[row][col] = 'X';
                 }
                 if (snakeSize > 1){
-                    for (int[] body : currentSnake){
-                        if (row == body[0] && col == body[1]){
+                    for (int body = 1; body < snakeSize; body++){
+                        if (row == currentSnake.get(body)[0] && col == currentSnake.get(body)[1]){
                             currentBoard[row][col] = 'O';
                         }
                     }

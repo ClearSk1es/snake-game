@@ -1,16 +1,12 @@
 package snake;
 //Importing non-blocking I/O;
-import org.jline.reader.LineReader;
-import org.jline.reader.LineReaderBuilder;
 import org.jline.terminal.Attributes;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.InfoCmp;
 import org.jline.utils.NonBlockingReader;
-import java.io.PrintWriter;
-
 import java.io.IOException;
-import java.io.Reader;
+
 
 public class Game {
 
@@ -100,7 +96,6 @@ public class Game {
                 terminal.flush();
 
                 //Wait
-
                 Thread.sleep(750);
 
             }

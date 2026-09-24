@@ -55,13 +55,16 @@ public class Game {
                 //Process input - Check Input
                 if (reader.available() >= 0){
                     int c = reader.read(100L);
-                    currentDirection = switch (c){
-                        case 'w' -> "up";
-                        case 's' -> "down";
-                        case 'a' -> "left";
-                        case 'd' -> "right";
-                        default -> currentDirection;
-                    };
+                    if(snake.getSnakeSize() == 1){
+                        currentDirection = switch (c){
+                            case 'w' -> "up";
+                            case 's' -> "down";
+                            case 'a' -> "left";
+                            case 'd' -> "right";
+                            default -> currentDirection; };
+                    }else{
+                        currentDirection = getDirectionInput(c, currentDirection);
+                    }
                 }
 
                 //Update State
@@ -84,8 +87,7 @@ public class Game {
                     board.addFood(food);
 
                 }
-
-                //Update visual representation
+                //Update visual
                 board.setBoard(snake, food);
 
                 //Move cursor back to top-left
@@ -102,6 +104,36 @@ public class Game {
 
 
         }
+        public static String getDirectionInput(int c, String currentDirection){
+            //Return direction based on snake current direction to prevent 180° turn
+            switch (c){
+                case 'w':
+                    if ("down".equals(currentDirection)){
+                        return  "down";
+                    } else {
+                        return  "up";
+                    }
+                case 'd':
+                    if ("left".equals(currentDirection)){
+                        return "left";
+                    } else {
+                        return "right";
+                    }
+                case 's':
+                    if ("up".equals(currentDirection)){
+                        return "up";
+                    } else {
+                        return "down";
+                    }
+                case 'a':
+                    if ("right".equals(currentDirection)){
+                        return "right";
+                    } else {
+                        return "left";
+                    }
+                default: return currentDirection;
 
+            }
 
+        }
 }

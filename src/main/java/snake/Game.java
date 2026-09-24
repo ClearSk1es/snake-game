@@ -53,8 +53,8 @@ public class Game {
             boolean game = true;
             while (true){
                 //Process input - Check Input
-                if (reader.available() > 0){
-                    int c = reader.read(5000L);
+                if (reader.available() >= 0){
+                    int c = reader.read(100L);
                     currentDirection = switch (c){
                         case 'w' -> "up";
                         case 's' -> "down";
@@ -96,7 +96,7 @@ public class Game {
                 terminal.flush();
 
                 //Wait
-                Thread.sleep(750);
+                Thread.sleep(100);
 
             }
 
